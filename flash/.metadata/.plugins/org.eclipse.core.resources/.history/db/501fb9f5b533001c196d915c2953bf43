@@ -1,0 +1,47 @@
+/*
+ * flash.c
+ *
+ *  Created on: Oct 23, 2021
+ *      Author: 0
+ */
+#include "stm32l4xx_hal.h"
+#include <flash.h>
+
+void Flash_Erase(uint32_t address){
+	HAL_FLASH_Unlock();
+	FLASH_EraseInitTypeDef EraseInitStruct;
+	EraseInitStruct.Banks = 1;
+	EraseInitStruct.NbPages = 1;
+	EraseInitStruct.Page = address;
+	EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
+	uint32_t pagerror;
+	HAL_FLASHEx_Erase(&EraseInitStruct, &pagerror);
+	HAL_FLASH_Lock();
+}
+
+void Flash_Write_Int(uint32_t address, int value){
+	HAL_FLASH_Unlock();
+
+	HAL_FLASH_Lock();
+
+}
+
+void Flash_Write_Fl(float value){
+
+}
+
+void Flash_Write_Array(uint8_t *arr, uint16_t len){
+
+}
+
+int Flash_Read_Int(uint32_t address){
+
+}
+
+float Flash_Read_Float(uint32_t address){
+
+}
+
+void Flash_Read_Array(uint32_t address, uint8_t *arr, uint16_t len){
+
+}

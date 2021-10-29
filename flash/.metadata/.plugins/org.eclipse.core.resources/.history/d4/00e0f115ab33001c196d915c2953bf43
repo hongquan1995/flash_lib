@@ -1,0 +1,17 @@
+/*
+ * flash.h
+ *
+ *  Created on: Oct 23, 2021
+ *      Author: 0
+ */
+
+#ifndef FLASH_FLASH_H_
+#define FLASH_FLASH_H_
+
+void Flash_Erase(uint32_t address);
+void Flash_Write_Int(int value);
+void Flash_Write_Fl(float value);
+
+
+
+#endif /* FLASH_FLASH_H_ */

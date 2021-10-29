@@ -1,0 +1,34 @@
+/*
+ * flash.c
+ *
+ *  Created on: Oct 23, 2021
+ *      Author: 0
+ */
+
+void Flash_Erase(uint32_t address){
+
+}
+
+void Flash_Write_Int(int value){
+
+}
+
+void Flash_Write_Fl(float value){
+
+}
+
+void Flash_Write_Array(uint8_t *arr, uint16_t len){
+
+}
+
+int Flash_Read_Int(uint32_t address){
+
+}
+
+float Flash_Read_Float(uint32_t address){
+
+}
+
+void Flash_Read_Array(uint32_t address, uint8_t *arr, uint16_t len){
+
+}

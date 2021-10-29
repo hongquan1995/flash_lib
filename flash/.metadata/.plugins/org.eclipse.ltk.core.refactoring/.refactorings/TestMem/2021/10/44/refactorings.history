@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;TestMem/Core/flash/FLASH_PAGE_F1.c&apos; to &apos;FLASH_PAGE.c&apos;" description="Rename resource &apos;FLASH_PAGE_F1.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/flash/FLASH_PAGE_F1.c" name="FLASH_PAGE.c" stamp="1635416664487" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;TestMem/Core/flash/FLASH_PAGE_F1.h&apos; to &apos;FLASH_PAGE.h&apos;" description="Rename resource &apos;FLASH_PAGE_F1.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/flash/FLASH_PAGE_F1.h" name="FLASH_PAGE.h" stamp="1635416674251" updateReferences="true"/>
+</session>
