@@ -14,10 +14,6 @@
 #include "stdio.h"
 
 
-/* STM32F103 have 128 PAGES (Page 0 to Page 127) of 1 KB each. This makes up 128 KB Flash Memory
- * Some STM32F103C8 have 64 KB FLASH Memory, so I guess they have Page 0 to Page 63 only.
- */
-
 /* FLASH_PAGE_SIZE should be able to get the size of the Page according to the controller */
 
 // quanDH
@@ -68,11 +64,23 @@ float Bytes2float(uint8_t * ftoa_bytes_temp)
    return float_variable;
 }
 
+void Flash_erase(uint32_t Page){
+    static FLASH_EraseInitTypeDef EraseInitStruct;
+	uint32_t PAGEError;
+	/* Fill EraseInit structure*/
+    EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
+    EraseInitStruct.Page = Page;
+	EraseInitStruct.NbPages = 1;
+    EraseInitStruct.Banks = 1;
+	if (HAL_FLASHEx_Erase(&EraseInitStruct, &PAGEError) != HAL_OK)
+	{
+	   /*Error occurred while page erase.*/
+	   return HAL_FLASH_GetError();
+	}
+}
 
 uint32_t Flash_Write_Data (uint32_t StartPageAddress, uint8_t *Data, uint32_t data_length)
 {
-	static FLASH_EraseInitTypeDef EraseInitStruct;
-	uint32_t PAGEError;
 	uint8_t	*temp_data_address;
 	uint16_t i=0;
 	uint64_t writeval=0, writetime=0;
@@ -83,25 +91,12 @@ uint32_t Flash_Write_Data (uint32_t StartPageAddress, uint8_t *Data, uint32_t da
 
 	  /* Unlock the Flash to enable the flash control register access *************/
 	if(data_length%8 == 0){
-
 		//Calculate number of word to write
-		writetime = data_length/8;
-	   HAL_FLASH_Unlock();
-
+		writetime = data_length / 8;
+		HAL_FLASH_Unlock();
 	   /* Erase the user Flash area*/
 	   uint32_t Page = GetPage(StartPageAddress);
-
-	   /* Fill EraseInit structure*/
-	   EraseInitStruct.TypeErase   = FLASH_TYPEERASE_PAGES;
-	   EraseInitStruct.Page 	   = Page;
-	   EraseInitStruct.NbPages     = 1;
-	   EraseInitStruct.Banks	   = 1;
-
-	   if (HAL_FLASHEx_Erase(&EraseInitStruct, &PAGEError) != HAL_OK)
-	   {
-	     /*Error occurred while page erase.*/
-		  return HAL_FLASH_GetError ();
-	   }
+	   Flash_erase(Page);
 	   for (i = 0;i<writetime;i++)
 		{
 			writeval = *(__IO uint64_t*)(temp_data_address);

@@ -18,15 +18,16 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include <FLASH_PAGE.h>
+
 #include "main.h"
 
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "flash.h"
+#include <FLASH_PAGE.h>
 
-#define  		ADDRESS_DATA_STORAGE				0x8019000
+#define  		ADDRESS_DATA_STORAGE1				0x801F800	// d?a ch? mu?n write vào flash
+#define  		ADDRESS_DATA_STORAGE2				0x8019000
 #define  		ADDRESS_DATA_STORAGE_FLOAT			0x8023000
 /* USER CODE END Includes */
 
@@ -60,7 +61,8 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t data[] = {0x0A, 0x22, 0x55, 0x66, 0x77, 0x88, 0x99, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x21};
+uint8_t data[] = {0x0A, 0x22, 0x55, 0x66, 0x77, 0x88, 0x99, 0x12}; // d? li?u luu vào flash
+uint8_t data1[] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
 uint8_t buffer[100];
 /* USER CODE END 0 */
 
@@ -93,8 +95,8 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  Flash_Write_Data(ADDRESS_DATA_STORAGE, data, sizeof(data));
-  Flash_Read_Data(ADDRESS_DATA_STORAGE, buffer, 16);
+  Flash_Write_Data(ADDRESS_DATA_STORAGE1, data, sizeof(data));
+  Flash_Read_Data(ADDRESS_DATA_STORAGE1, buffer, 8);
 //  Flash_Write_NUM(ADDRESS_DATA_STORAGE_FLOAT, 25.76);
 //  vr_read = Flash_Read_NUM(ADDRESS_DATA_STORAGE_FLOAT);
   /* USER CODE END 2 */
